@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.card-shadow {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.085);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-shadow:hover {
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+}
+
+.img-centered:hover {
+  transform: scale(1.1);
+}
+
+.bg-primary-personality {
+  background-color: rgba(202, 199, 199, 0.375);
+}
+
+.card__personality {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card__personality:hover {
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+}
