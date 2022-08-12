@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Figure, Row } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Container,
+  Figure,
+  Row,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
@@ -8,21 +15,26 @@ import { addCartThunk } from "../store/slices/carts.slice";
 import { getProductsThunk } from "../store/slices/products.slice";
 
 const ProductDetail = () => {
+  //
   const allProducts = useSelector((state) => state.products);
   const [productsDetail, setProductsDetail] = useState({});
   const [suggestedProducts, setSuggestedProducts] = useState([]);
-  const [countCart, setCountCart] = useState(0);
   const [quantity, setQuantity] = useState(1);
+
+  //
+  const token = localStorage.getItem("token");
 
   //
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  /** */
   useEffect(() => {
     dispatch(getProductsThunk());
   }, []);
 
+  /** */
   useEffect(() => {
     const productsFind = allProducts.find(
       (productsItem) => productsItem.id === Number(id)
@@ -34,6 +46,20 @@ const ProductDetail = () => {
     );
     setSuggestedProducts(filteredProducts);
   }, [allProducts, id]);
+
+  /** add products cart */
+  const addProductCart = () => {
+    if (token) {
+      const productCart = {
+        id: productsDetail.id,
+        quantity,
+      };
+      dispatch(addCartThunk(productCart));
+      console.log(productCart);
+    } else {
+      navigate("/login");
+    }
+  };
 
   //  console.log(productsDetail);
 
@@ -71,7 +97,7 @@ const ProductDetail = () => {
                 <label htmlFor="" className="text-secondary">
                   Price:
                 </label>
-                <h5>
+                <h5 className="mt-3">
                   <b>${productsDetail?.price}</b>
                 </h5>
               </div>
@@ -80,39 +106,46 @@ const ProductDetail = () => {
                   Quantity:
                 </label>
                 <div className="quantity__details d-flex justify-content-center">
-                  <button
-                    onClick={() => setCountCart(countCart - 1)}
-                    className="btn btn-outline-secondary rounded-none  d-flex align-items-center px-1 m-0"
-                  >
-                    <box-icon
-                      name="minus"
-                      color="gray"
-                      size="sm"
-                      className=""
-                    ></box-icon>
-                  </button>
-                  <div className="value d-flex align-items-center text-primary fs-5 px-3 border  mx-0">
-                    {countCart}
-                  </div>
-                  <button
-                    onClick={() => setCountCart(countCart + 1)}
-                    className="btn btn-outline-secondary  d-flex align-items-center px-1 m-0 "
-                  >
-                    <box-icon
-                      name="plus"
-                      className=""
-                      size="sm"
-                      color="gray"
-                    ></box-icon>
-                  </button>
+                  <ButtonGroup className="border" size="sm">
+                    <Button
+                      onClick={() => setQuantity(quantity - 1)}
+                      disabled={quantity === 1}
+                      variant="outline-dark  "
+                      className="d-flex align-items-center border"
+                    >
+                      <box-icon
+                        name="minus"
+                        color="gray"
+                        size="sm"
+                        className=""
+                      ></box-icon>
+                    </Button>
+                    <Button
+                      variant="light"
+                      className=" text-dark border px-3 fs-5"
+                      disabled
+                    >
+                      {quantity}
+                    </Button>
+                    <Button
+                      onClick={() => setQuantity(quantity + 1)}
+                      variant="outline-dark"
+                      className="d-flex align-items-center border  "
+                    >
+                      <box-icon
+                        name="plus"
+                        className=""
+                        size="sm"
+                        color="gray"
+                      ></box-icon>
+                    </Button>
+                  </ButtonGroup>
                 </div>
               </div>
             </div>
 
             <Button
-              onClick={() =>
-                dispatch(addCartThunk(productsDetail.id, quantity))
-              }
+              onClick={addProductCart}
               variant=""
               className="btn btn-outline-primary d-flex justify-content-center align-items-center text-center w-100  pt-xs-2 mt-xs-2 mt-sm-3 mt-lg-4 my-1 "
             >

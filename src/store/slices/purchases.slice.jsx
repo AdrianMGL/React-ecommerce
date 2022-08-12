@@ -3,6 +3,7 @@ import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { setIsLoading } from "./isLoading.slice";
 
+/** */
 export const purchasesSlice = createSlice({
   name: "purchases",
   initialState: [],
@@ -14,7 +15,7 @@ export const purchasesSlice = createSlice({
   },
 });
 
-/** Get purchases */
+/** Get */
 export const getPurchasesThunk = () => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
@@ -23,9 +24,12 @@ export const getPurchasesThunk = () => (dispatch) => {
       getConfig()
     )
     .then((res) => dispatch(setPurchases(res.data.data.purchases)))
+    .catch((error) => console.log(error.response))
     .finally(() => dispatch(setIsLoading(false)));
 };
 
+
+/** */
 export const { setPurchases } = purchasesSlice.actions;
 
 export default purchasesSlice.reducer;

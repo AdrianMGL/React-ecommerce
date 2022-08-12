@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Logout = () => {
   return (
     <div className="mt-5 pt-5 mb-5 pb-5">
-      {/* <h1>Logout</h1> */}
       <Row className="">
         <Col className="d-flex justify-content-center align-items-center align-self px-xs-2 px-sm-3 px-lg-5 mx-xs-1 mx-sm-3 mx-lg-5 my-5 ">
           <Form className=" pt-4 pb-4 px-xs-2  px-sm-3 px-lg-5 mx-xs-2 mx-sm-3 mx-lg-5  rounded bg-light shadow-lg ">

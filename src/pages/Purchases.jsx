@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Container, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import PurchasesItem from "../components/PurchasesItem";
 import { getPurchasesThunk } from "../store/slices/purchases.slice";
 
@@ -18,8 +17,6 @@ const Purchases = () => {
   useEffect(() => {
     dispatch(getPurchasesThunk());
   }, []);
-
-//  console.log(purchases);
 
   return (
     <Container className="mt-5 pt-5 mx-auto">

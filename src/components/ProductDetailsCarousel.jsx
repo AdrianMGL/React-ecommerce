@@ -2,9 +2,6 @@ import React from "react";
 import { Carousel, Container } from "react-bootstrap";
 
 const ProductDetailsCarousel = ({ PDCarousel }) => {
- // console.log(PDCarousel);
- // console.log(PDCarousel?.productImgs);
-
   return (
     <Container>
       <Carousel variant="dark">

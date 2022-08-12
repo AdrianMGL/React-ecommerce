@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
   Row,
-  Card,
   Col,
   InputGroup,
   Form,
   Button,
   ListGroup,
   Container,
-  Badge,
 } from "react-bootstrap";
 import axios from "axios";
 
@@ -19,22 +17,20 @@ import {
   filterCategoryThunk,
 } from "../store/slices/products.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import Footer from "./Footer";
+import HomeCarousel from "../components/HomeCarousel";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const [categories, setCategories] = useState([]);
 
   //
   const products = useSelector((state) => state.products);
 
+  /*** */
   useEffect(() => {
     dispatch(getProductsThunk());
-
     axios
       .get(
         "https://ecommerce-api-react.herokuapp.com/api/v1/products/categories"
@@ -42,17 +38,19 @@ const Home = () => {
       .then((res) => setCategories(res.data.data.categories));
   }, []);
 
-  // console.log(products);
- // console.log(categories);
-  //console.log(searchValue);
-
   return (
     <Container fluid className="">
-      <Row className="my-5 ">
-        <Col lg={3} className="mt-5" fixed="top">
-          {/* Category */}
-          <ListGroup className="mt-lg-5 pt-lg-3">
-            <h5 className="text-primary my-lg-2">All Category</h5>
+      <HomeCarousel className="" />
+      <Row className="my-1  ">
+        <Col lg={3} className=" mt-1" fixed="top">
+          <ListGroup className="mt-sm-2 pt-sm-2 mt-lg-5 pt-lg-3">
+            <h5
+              className="text-secondary my-lg-2"
+              onClick={() => dispatch(getProductsThunk())}
+              style={{ cursor: "pointer" }}
+            >
+              All category
+            </h5>
             {categories.map((category) => (
               <ListGroup.Item
                 key={category.id}
@@ -64,14 +62,51 @@ const Home = () => {
               </ListGroup.Item>
             ))}
           </ListGroup>
+          {/* Price */}
+          <ListGroup className="mt-2 pt-2  mt-sm-2 pt-sm-2 mb-sm-2 pb-sm-2  mt-lg-3 pt-lg-3">
+            <h5 className="text-secondary my-lg-2">Price</h5>
+            <Form>
+              <Form.Group
+                as={Row}
+                className="mb-3"
+                controlId="formPlaintextNumberFrom"
+              >
+                <Form.Label column sm="2">
+                  From
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Control type="number" placeholder="Range " />
+                </Col>
+              </Form.Group>
+
+              <Form.Group
+                as={Row}
+                className="mb-3"
+                controlId="formPlaintextNumberTo"
+              >
+                <Form.Label column sm="2">
+                  to
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Control type="number" placeholder="Range " />
+                </Col>
+              </Form.Group>
+              <div className="d-grid gap-2 mt-4 ">
+                <Button variant="outline-dark" size="xs">
+                  Filter
+                </Button>
+              </div>
+            </Form>
+          </ListGroup>
         </Col>
-        <Col className="mt-lg-2 ">
-          <Row className="justify-content-start mt-xs-2 mt-sm-4 mt-lg-5">
-            <Col xs="12" lg="8" className="">
-              <InputGroup className="mb-3 ">
+
+        <Col className="mt-xs-3 pt-xs-1 mt-lg-1 ">
+          <Row className="justify-content-start mt-xs-3 mt-sm-2 mt-lg-2 mb-sm-1 pb-xs-1 pb-sm-2 pb-lg-2">
+            <Col xs="12" lg="8" className="bg- mt-1 pt-2">
+              <InputGroup className="mb-3 mt-xs-3 pt-xs-5">
                 <Form.Control
-                  placeholder="What are you looking for?"
-                  aria-label="What are you looking for?"
+                  placeholder="Search product"
+                  aria-label="Search product"
                   aria-describedby="basic-addon2"
                   onChange={(e) => setSearchValue(e.target.value)}
                   value={searchValue}
@@ -79,7 +114,7 @@ const Home = () => {
                 />
                 <i className="bx bx-user"></i>
                 <Button
-                  variant="outline-success"
+                  variant="outline-dark"
                   onClick={() => dispatch(filterTitleThunk(searchValue))}
                 >
                   Search

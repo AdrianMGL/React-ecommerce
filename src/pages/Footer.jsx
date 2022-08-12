@@ -1,12 +1,19 @@
 import React from "react";
 
 const Footer = () => (
-  <footer className="page-footer font-small blue mt-5 pt-5 bg-info0">
+  <footer className="page-footer font-small blue mt-5 pt-5 shadow-lg">
     <div className="container-fluid text-center text-md-left text-secondary">
       <div className="row">
         <div className="col-md-6 mt-md-0 mt-3">
-          <h5 className="text-uppercase text-primary ">e-commerce</h5>
-          <p>Ponte en contacto y déjame saber como puedo ayudarle.</p>
+          <h4 className="text-uppercase text-primary  ">
+            <b>e-commerce</b>
+          </h4>
+          <h5>
+            <b>Free shipping</b> on your first purchase.
+          </h5>
+          <h5>
+            Register and know the <b>benefits</b>
+          </h5>
         </div>
 
         <hr className="clearfix w-100 d-md-none pb-0" />

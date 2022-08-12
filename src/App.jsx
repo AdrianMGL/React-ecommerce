@@ -1,6 +1,6 @@
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import "./App.css";
-import { LoadingScreen, NavBar } from "./components";
+import { LoadingScreen, NavBar, ProtectedRoutes } from "./components";
 import { useSelector } from "react-redux";
 import {
   Categories,
@@ -9,10 +9,11 @@ import {
   Logout,
   ProductDetail,
   Purchases,
+  Cart,
 } from "./pages";
-import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Footer from "./pages/Footer";
+import "./App.css";
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
@@ -27,7 +28,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/purchases" element={<Purchases />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/purchases" element={<Purchases />} />
+            <Route path="/cart" element={<Cart />} />
+          </Route>
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </Container>

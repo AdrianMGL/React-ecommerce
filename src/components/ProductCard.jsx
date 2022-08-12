@@ -10,8 +10,6 @@ const ProductCard = ({ productsItem }) => {
 
   const [quantity, setQuantity] = useState(1);
 
-  //console.log(productsItem);
-
   return (
     <Col>
       <Card
@@ -25,7 +23,6 @@ const ProductCard = ({ productsItem }) => {
           style={{ height: "12rem", objectFit: "contain" }}
         />
         <Card.Body className="mx-3">
-          {/* <hr /> */}
           <Card.Title className=" text-dark my-2 mx-xs-1 mx-sm-2 mx-lg-2 ">
             {productsItem.title}
           </Card.Title>
