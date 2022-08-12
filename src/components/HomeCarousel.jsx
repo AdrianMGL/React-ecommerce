@@ -12,7 +12,7 @@ const HomeCarousel = () => {
     <Container fluid>
       <Carousel
         variant="dark"
-        className="mt-xs-2 pt-xs-2 mt-sm-1 pt-sm-1 mt-5 pt-5"
+        className="mt-xs-2 pt-xs-2 mt-sm-3 pt-sm-3 mt-5 pt-5"
       >
         <Carousel.Item>
           <img

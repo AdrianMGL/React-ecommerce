@@ -39,8 +39,8 @@ const Home = () => {
   }, []);
 
   return (
-    <Container fluid className="">
-      <HomeCarousel className="" />
+    <Container fluid className="mt-5 pt-3">
+      <HomeCarousel className="mt-5 pt-5" />
       <Row className="my-1  ">
         <Col lg={3} className=" mt-1" fixed="top">
           <ListGroup className="mt-sm-2 pt-sm-2 mt-lg-5 pt-lg-3">
